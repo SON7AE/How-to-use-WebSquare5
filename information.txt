@@ -1,0 +1,95 @@
+How to use WebSquare5 Studio Tool
+
+1. 웹스퀘어5는 Mac OS에서는 구동되지 않는다. 오로지 Window 기반에서 작동하는 UI/UX Tool 이다.
+2. 웹스퀘어5는 교육자료 파일에서 C 드라이브 하위에 WEBSQUARE_DEV_PACK 폴더를 생성
+   그 다음에 해당위치에서 압축을 푼다. 압축을 풀 땐, 반드시 압축 해제 프로그램이 있어야 한다.
+   window default로 압축해제하게 되면 자료의 내용이 손상될 수 있다.
+3. 압축해제된 구성 요소 중 우선 maria_db.bat. 이라는 실행파일을 클릭하여 실행한다.
+   이 파일이 local db인 maria db를 실행시키는 파일이다.
+   실행된 command 창은 더 이상 제어할 부분이 없으므로, 최하단으로 위치시켜준다.
+4. Designer 모드는 퍼블리셔가 사용하는 기본 모드이며, 개발자용 기본 모드는 Developer이므로 해당 모드를 선택하여 실행한다.
+5. 설정한 Perspective의 구성이 깨지더라도 해당 viewer에서 마우스 우클릭 후 reset 기능을 이용하면 원래의 설정한 모드로 되돌릴 수 있다.
+6. WebSquare 화면 파일 생성은 반드시 WebRoot 이하에서 생성한다.
+   WebSquare는 Client 자원이기 때문이다.
+7. 파일 생성시 일반 파일을 선택하지 말고, WebSquare Page를 통해 생성한다.
+
+------------------------------------------------------------------------------------------------------------
+
+1. Script 부분에서는 JavaScript 로직을 작성한다.
+   WebSquare5 파일을 생성하면, onPageload(페이지 로딩 후 실행)과 onPageunload(페이지 종료 후 실행) 이벤트가 자동 등록 된다.
+   
+   예) API를 통해 적용한 값을 확인할 수 있으며, initValue라는 속성과 setValue라는 API를 함께 적용했을 경우,
+      setValue를 통해 적용한 값이 최종 반영된다. 이유는 onPageload 부분에서 setValue를 실행하였는데,
+      onPageload부분의 수행시점은 모든 컴포넌트를 그려준 이후에 반영되기 때문이다. 
+2. DataCollection 에서는 data 객체를 생성하고 관리한다.
+   - DataMap : 단건 data 관리
+   - DataList : 다건 data 관리
+   - LinkedDataList : 생성된 dataList에서 별도의 조건을 주어 filter된 data를 확인한다.
+   - AlliasDataMap : Page Coding에서 자식에서 부모의 dataMap 객체를 참조할 때 사용한다.
+   - AlliasDataList - Page coding에서 자식에서 부모의 datalist 객체를 참조할 때 사용한다.
+3. Submission에서는 웹스퀘어의 통신 객체를 생성 및 관리한다.
+   웹스퀘어에서는 <form>을 이용한 전송, 이동방식으로 통신하지 않고, Submission이라는 객체를 생성하여 통신한다.
+4. Design 컴포넌트를 배치하려면, Pallette View에서 사용하고자 하는 컴포넌트를 선택하여 사용한다.
+
+------------------------------------------------------------------------------------------------------------
+
+Inputbox
+HTML에서 제공되는 input 태그의 type=text와 유사한 인터페이스를 제공한다.
+다양한 Property를 지원하여 간단하게 value를 제어할 수 있다.
+제공된 샘플은 입력하는 value의 data type을 명시하여 해당 값을 displayFormat을 제어한 것이다.
+
+Secret
+HTML에서 제공되는 input type="password"와 유사한 인터페이스를 제공한다.
+입력된 value가 [*]로 화면에 표시된다.
+
+사용자의 관점에서는 화면 렌더링 순서가 위에서부터 아래로, 왼쪽에서부터 오른쪽으로 렌더링 될 때 가정 보기 편한 형태로 인식되는데,
+현재와 같은 구조라면, 반대로 렌더링 되기 대문에 사용자가 불편함을 느낄 수 있는 구조이다.
+이러한 경우 화면 렌더링을 보정하기 위해, 모든 컴포넌트의 top, left 값을 비교하여
+렌더링 순서를 일일이 맞춰 주어야 하는 불편함이 있기 때문에 WebSquare5에서는 Absolute Mode를 권장하지 않는다.
+Static 모드를 활용하자.
+
+------------------------------------------------------------------------------------------------------------
+
+1. WebSquare Data Binding
+
+  - 기본값 셋팅이 필요한 Component들에 대하여 모두 id를 부여한다.
+  - WebSquare의 Component들은 id를 부여하면, 해당 id가 전역변수로 인식되어 script에서 바로 사용이 가능하기 때문이다.
+  - id를 적용할 때, 주의사항은 공백은 허용하지 않으며, '-' 같은 문자는 JavaScript Parsing 과정에서 오류를 일으킬 수 있으므로
+    사용을 권장하지 않는다.
+  - id를 적용할 때, 또 하나의 주의사항은 unique한 id를 사용해야 한다는 점이다.
+    예를 들어 '이름'을 나타내는 component라 해서 단순하게 'name'으로 id를 사용하면, 이러한 id는 중복될 수 있기 때문에
+    오류를 발생할 수 있다. 그렇기 때문에 중복되지 않을 prefix 등을 사용하여 unique한 id로 적용하는 것이 중요하다.
+  - WebSquare의 util API를 입력할 때, $p 객체를 이용할 수 있다.
+    $p 입력후 '.' 을 입력하면, WebSquare5에서 사용가능한 util API를 확인할 수 있다.
+
+------------------------------------------------------------------------------------------------------------
+
+1. 웹스퀘어에서 오늘 날짜를 구해오는 API는 $p.getCurrentServerDate 라는 API를 이용한다.
+  - 사용방법은 $p.getCurrentServerDate("yyyyMMdd")와 같이 년월일 pattern을 parameter로 주면 된다.
+    주의할 사항으로는 pattern 입력시 대소문자를 구분한다는 점이다.
+    '년 월 일 시 분 초'까지 표현할 땐, 'yyyyMMddHHmmss'으로 표현하는데,
+    대문자 MM은 '월' 표시, 소문자 mm은 '분'을 표시하기 때문이다.
+
+  - 이메일 부분에 값을 setting 하는 것은 이름부분과 마찬가지로 Inputbox의 setValue API를 이용하여 적용할 수 있다.
+  - API를 통하여 항목을 추가할 때는 addItem 이라는 API를 이용할 수 있다.
+    component의 id로 접근하여 addItem 이라는 API를 확인한다.
+    예) ul_gender.addItem( value, label, index )
+
+2. Data Binding
+  - 값을 넣어 줄 때는 data의 형식에 따라 setData, setXML, setJSON 등을 사용할 수 있다.
+    setData - 1차원 Array
+    setXML - xml Object
+    setJSON - json Object
+
+  - setJSON을 활용하여 값을 setting 해보면,
+    우선 값을 넣어줄 json 객체를 지정 후 첫 번째 parameter로 넣는다.
+    2번째 parameter인 append는 append 여부를 묻는 것으로
+    true를 지정하면, 기존 data에 붙여넣기를 적용하며,
+    false를 지정하면, 기존 data를 지우고 신규 data만 적용한다.
+    default는 false 이다.
+
+  - script로 이동하여 API를 활용해보면,
+    data 객체와 binding을 할 때에는 setNodeSet 이라는 API를 활용한다.
+    nodeset - 연결할 dataList의 id, 반드시 "data:dataListID" 형식을 사용한다.
+    label - 항목명을 나타내는 컬럼 id
+    value - 항목값을 나타내는 컬럼 id
