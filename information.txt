@@ -93,3 +93,15 @@ Static 모드를 활용하자.
     nodeset - 연결할 dataList의 id, 반드시 "data:dataListID" 형식을 사용한다.
     label - 항목명을 나타내는 컬럼 id
     value - 항목값을 나타내는 컬럼 id
+
+------------------------------------------------------------------------------------------------------------
+
+1. 먼저 연결해 줄 dataList를 생성한다.
+   웹스퀘어의 dataList 생성은 'DataCollection'에서 적용한다.
+   Data 객체를 생성할 때 단 건의 Data는 DataMap으로, 2건 이상의 Data는 DataList로 생성한다.
+   DataMap도 component와 마찬가지로 속성을 지니고 있으며, 항목을 표시 할 때에는 'key'로 표시가 된다.
+   웹스퀘어의 checkbox와 같은 list를 담는 component와 data 객체와 연결하려면 BindItemSet 기능을 이용해야 한다.
+   - NodeSet : 연결하려는 dataList 이름
+   - Label : 항목으로 보여질 컬럼 이름
+   - Value : 값으로 보여질 컬럼 이름
+   - Span Direction은 row 방향으로 지정한다.
