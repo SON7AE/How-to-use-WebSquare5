@@ -17,3 +17,20 @@
   - Design : 내가 만든 레이아웃들이 목록으로 보여진다.
   - Script : 내가 만든 함수들이 목록으로 보여진다.
   - Head : 디자인과 스트립트를 제외한 나머지가 목록으로 보여진다.
+
+3. Position 값별 차이
+  - absolute : 절댓값 top, left 지정(소스 순서, display 위치 값 동일 X)
+  - static : 요소를 나열 배치 (소스 순서와 display 동일)
+
+4. Static 그리기
+  - html 태그 성질
+  - inline level 요소 : 개행 X (input == inputBox)
+  - block level 요소 : 개행 O (div == group)
+    width 특성 : 값이 없으면 자식 width 전체
+    height 특성 : 값이 없으면 자식 height 전체
+    자식 float 가지면 : overflow: hidden;
+
+  - 기준객체 위치지정
+  - CSS 여백 지정
+    margin : 기준 객체의 외부 여백
+    padding : 기준 객체의 내부 여백
