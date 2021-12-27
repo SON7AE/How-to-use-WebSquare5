@@ -53,3 +53,11 @@
    => ID : Submission 이름
    => Reference : 화면에서 던져주기 위한 Data
    => Target : 받아온 Data를 화면에 던져준다?
+   => 조회 중입니다. 처리 중입니다. 등과 같은 문구를 작성
+
+   => submit 함수 : 초기값 처리, validation check 수행
+   => submit-done 함수 : 
+   => submit-error 함수 : 
+
+   => Add submission에서 Detailed 클릭하면 상세화면이 뜬다.
+   => Mode, Method, Encoding 이 값은 각각 되도록 asynchronous, post, UTF-8 값으로 유지되어야 한다.
