@@ -48,3 +48,8 @@
    => BindItemSet - Value : 코드, 값 담겨진 항목으로 엮는다.
    DataMap, DataList 타입 중 목록성 컴포넌트는 DataList 타입으로 만든다.
    오른쪽 화면 Outline Click => DataCollection => 마우스 오른쪽 버튼 
+
+7. Submission Data 통신가이드
+   => ID : Submission 이름
+   => Reference : 화면에서 던져주기 위한 Data
+   => Target : 받아온 Data를 화면에 던져준다?
