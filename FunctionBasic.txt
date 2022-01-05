@@ -1,8 +1,8 @@
 1. API 연결하는 방법
-  => dataMap을 만든다.
-  => dataList를 만든다. (필요한 경우)
+   => dataMap을 만든다.
+   => dataList를 만든다. (필요한 경우)
      데이터맵을 생성하여, api 내의 데이터 변수를 ID / NAME / DATATYPE 순으로 기입한다.
-  => Data를 최종실행할 서브미션(Submission)을 생성한다.
+   => Data를 최종실행할 서브미션(Submission)을 생성한다.
      - Submission ID : 임의로 설정
      - Reference : 보통 dataMap을 할당한다. 그리고 key 값에 queryString을 입력한다. (이유는 모른다.)
      - Target은 dataList가 있다면, dataList로 받고
@@ -10,8 +10,15 @@
      - dataMap으로만 Submission을 구성할 경우, Single Mode를 체크해준다. (이유는 모른다.)
      - URL Action은 해당 프로젝트 주소를 기입한다.
      - Method는 Swagger 혹은 SDM이 있다면, 그곳에서 지정해준 get/post/put/delete ... 중 선택한다.
-  => Submit-done Function : 서브미션이 실행된 후에 제대로 작동하는지 확인해볼 수 있는 함수이다.
-  => Script 부분에 api를 호출하는 함수를 기입한다.
+   => Submit-done Function : 서브미션이 실행된 후에 제대로 작동하는지 확인해볼 수 있는 함수이다.
+   => Script 부분에 api를 호출하는 함수를 기입한다.
      - 실행함수 1 : dataMapName.set("변수", "변수 값");
      - 실행함수 2 : com.sbm.execute("SubmissionName", {}, gcm.SERVICE_LIST_FCMM);
        * gcm.SERVICE_LIST_FCMM 이 부분은 서버 이름에 따라 다르다.
+
+2. 간단한 이벤트 생성방법
+   => publishing(이하 퍼블) 해당 레이아웃/버튼 등에서 마우스 오른쪽 클릭을 통해 원하는 이벤트를 준다.
+
+3. 화면창 세팅방법
+   => Window(상단에 위치한 상태표시줄(?))에서 Perspective => Reset Perspective 클릭하여 초기화시킨다.
+   => Show View => other => WebSquare => select options. 
