@@ -12,3 +12,6 @@
      - Method는 Swagger 혹은 SDM이 있다면, 그곳에서 지정해준 get/post/put/delete ... 중 선택한다.
   => Submit-done Function : 서브미션이 실행된 후에 제대로 작동하는지 확인해볼 수 있는 함수이다.
   => Script 부분에 api를 호출하는 함수를 기입한다.
+     - 실행함수 1 : dataMapName.set("변수", "변수 값");
+     - 실행함수 2 : com.sbm.execute("SubmissionName", {}, gcm.SERVICE_LIST_FCMM);
+       * gcm.SERVICE_LIST_FCMM 이 부분은 서버 이름에 따라 다르다.
