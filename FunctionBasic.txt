@@ -18,7 +18,9 @@
 
 2. 간단한 이벤트 생성방법
    => publishing(이하 퍼블) 해당 레이아웃/버튼 등에서 마우스 오른쪽 클릭을 통해 원하는 이벤트를 준다.
-
+   => Basic Bug 발생시 최종적으로 오류가 없을 법한 코드에서는 Source창을 열어 id / function 이름을 확인해본다.
+      일종의 웹스퀘어5 버그이다.
+      
 3. 화면창 세팅방법
    => Window(상단에 위치한 상태표시줄(?))에서 Perspective => Reset Perspective 클릭하여 초기화시킨다.
    => Show View => other => WebSquare => select options.

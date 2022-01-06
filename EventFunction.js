@@ -1,6 +1,6 @@
 // 데이터맵, 데이터리스트, 서브미션 실행함수
 scwin.onpageload = function () {
-  dataMapName.set('dataKey', 'dataKeyValue');
+  dataMapName.set('dataKeyId', 'dataKeyIdValue');
   // 서브미션 실행함수
   com.sbm.execute('submissionName', {}, gcm.SERVICE_LIST_FCMM);
   // gcm.SERVICE_LIST_FCMM 이 부분은 서버 이름에 따라 다르다.
@@ -87,3 +87,16 @@ scwin.idName_onclick = function (e) {
 };
 
 // --------------------------------------------------------------------
+
+// 변경사항 저장 클릭 이벤트
+scwin.idName = function () {
+  // 필수요소 조건
+  dataMapName.set('dataKeyId', 'dataKeyIdValue');
+
+  // 변경사항 조건
+  // getValue() 메서드로 레이아웃에 기입된 현재 값을 인식한다.
+  dataMapName.set('dataKeyId', dataKeyIdValue.getValue());
+  dataMapName.set('dataKeyId', dataKeyIdValue.getValue());
+
+  com.sbm.execute('submissionName', {}, gcm.SERVICE_LIST_FCMM);
+};
