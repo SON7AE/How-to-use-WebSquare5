@@ -1,3 +1,11 @@
+// 데이터맵, 데이터리스트, 서브미션 실행함수
+scwin.onpageload = function () {
+  dataMapName.set('dataKey', 'dataKeyValue');
+  // 서브미션 실행함수
+  com.sbm.execute('submissionName', {}, gcm.SERVICE_LIST_FCMM);
+  // gcm.SERVICE_LIST_FCMM 이 부분은 서버 이름에 따라 다르다.
+};
+
 // 등록방식 변경 - 체크박스 선택시 UI 제어
 // onchange 함수를 활용하여 내부에서 getValue() 값을 체크해
 // display: none; 과 같이 스타일을 제어할 수 있다.
