@@ -12,6 +12,8 @@ scwin.idName_onchange = function () {
   }
 };
 
+// --------------------------------------------------------------------
+
 // 버튼클릭 - 페이지 이동
 scwin.idName_onclick = function () {
   scwin.$w.parent().scwin.selectTab(0);
@@ -22,3 +24,58 @@ scwin.selectTab = function (tabIndex) {
   // tabControl : tab ID 명
   tabControl.setSelectedTabIndex(tabIndex);
 };
+
+// --------------------------------------------------------------------
+
+// 탭 생성 클릭이벤트
+// 등록 및 탭 생성 버튼의 퍼블리싱 레이아웃이 있다면 이곳에 먼저 이벤트를 걸어준다.
+scwin.idName_onclick = function (e) {
+  let tabId = '';
+  // tabControl : tab ID 명
+  let tabInfoList = tabControl.getTabInfo();
+  let tabIndex = 0;
+  let openAction = 'new';
+
+  var label = '등록'; // 이름은 프로젝트에 맞게 기입
+
+  // 이미 탭이 열린 경우, 해당 탭으로 이동
+  let i = 0;
+  for (i = 1; i < tabInfoList.length; i++) {
+    if (tabInfoList[i].label == label) {
+      tabId = tabInfoList[i].id;
+      tabIndex = i;
+      openAction = ' exist';
+    }
+
+    if (Comment.util.isEmpty(tabId)) {
+      tabId = 'tab' + (tabControl.getTabCount() + 1);
+      tabIndex = tabControl.getTabCount();
+    }
+
+    var tabOptions = {
+      label: label,
+      closable: true,
+      openAction: openAction,
+    };
+
+    // 등록페이지 URL 입력
+    var src = ''; // url address 기입
+    var contentsOptions = {
+      frameMode: 'wframePreload',
+      src: src,
+      alwaysDraw: false,
+      title: label,
+      dataObject: {
+        type: 'json',
+        name: 'param',
+        data: {
+          tabIndex: tabIndex,
+        },
+      },
+    };
+    tabId = tabControl.addTab(tabId, tabOptions, contentsOptions);
+    tabControl.setSelectedTabIndex(tabIndex);
+  }
+};
+
+// --------------------------------------------------------------------
