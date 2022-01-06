@@ -21,4 +21,5 @@
 
 3. 화면창 세팅방법
    => Window(상단에 위치한 상태표시줄(?))에서 Perspective => Reset Perspective 클릭하여 초기화시킨다.
-   => Show View => other => WebSquare => select options. 
+   => Show View => other => WebSquare => select options.
+   
