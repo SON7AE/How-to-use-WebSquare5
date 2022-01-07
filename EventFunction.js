@@ -21,7 +21,6 @@ scwin.idName_onchange = function () {
 };
 
 // --------------------------------------------------------------------
-
 // 버튼클릭 - 페이지 이동
 scwin.idName_onclick = function () {
   scwin.$w.parent().scwin.selectTab(0);
@@ -34,7 +33,6 @@ scwin.selectTab = function (tabIndex) {
 };
 
 // --------------------------------------------------------------------
-
 // 탭 생성 클릭이벤트
 // 등록 및 탭 생성 버튼의 퍼블리싱 레이아웃이 있다면 이곳에 먼저 이벤트를 걸어준다.
 scwin.idName_onclick = function (e) {
@@ -87,7 +85,6 @@ scwin.idName_onclick = function (e) {
 };
 
 // --------------------------------------------------------------------
-
 // 변경사항 저장 클릭 이벤트
 scwin.idName = function () {
   // 필수요소 조건
@@ -108,3 +105,11 @@ scwin.btn_reset_onclick = function () {
   com.win.setInt(LayoutIdName);
   dataMapName.set('dataKeyId', '');
 };
+
+// --------------------------------------------------------------------
+// Textarea와 같이 텍스트 값이 Null일 경우 에러 처리 알람
+if (com.util.isEmpty(dataMapName.get('KeyId'))) {
+  com.win.alert(com.data.getMessage('com.alt.0013', '배너명'));
+  // com.alt.0013 : 프로젝트 공통알람코드
+  // '배너명' : 레이아웃 label 값
+}
