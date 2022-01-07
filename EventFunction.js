@@ -100,3 +100,11 @@ scwin.idName = function () {
 
   com.sbm.execute('submissionName', {}, gcm.SERVICE_LIST_FCMM);
 };
+
+// --------------------------------------------------------------------
+// 취소 버튼/ 리셋 클릭 이벤트
+// 취소 버튼을 눌렀을 때, 데이터를 빈 값으로 넘겨준다 이해하면 된다.
+scwin.btn_reset_onclick = function () {
+  com.win.setInt(LayoutIdName);
+  dataMapName.set('dataKeyId', '');
+};
