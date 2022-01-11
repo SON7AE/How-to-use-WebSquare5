@@ -1,1 +1,2 @@
 1. maxlength : textarea, input 등 텍스트를 입력할 때 글자수 입력제한 기능을 주고 싶을 때 사용
+

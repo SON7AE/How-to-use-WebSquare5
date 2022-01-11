@@ -99,7 +99,7 @@ scwin.idName = function () {
 };
 
 // --------------------------------------------------------------------
-// 취소 버튼/ 리셋 클릭 이벤트
+// 취소 버튼 / 리셋 클릭 이벤트
 // 취소 버튼을 눌렀을 때, 데이터를 빈 값으로 넘겨준다 이해하면 된다.
 scwin.btn_reset_onclick = function () {
   com.win.setInt(LayoutIdName);
@@ -113,3 +113,36 @@ if (com.util.isEmpty(dataMapName.get('KeyId'))) {
   // com.alt.0013 : 프로젝트 공통알람코드
   // '배너명' : 레이아웃 label 값
 }
+
+// --------------------------------------------------------------------
+// 파일업로드 함수
+scwin.btn_fileUpload_onclick = function (e) {
+  var url = '/path 경로지정';
+  var data = {
+    type: 'insert',
+    policy: 'public-img',
+    subPath: '/fcmm/prod/',
+    callbackFn: 'scwin.popupCallBack',
+  };
+  var options = {
+    id: 'insertPopup',
+    popupName: '파일등록',
+    modal: true,
+    width: 700,
+    height: 250,
+    type: 'wframePopup',
+  };
+
+  com.win.openPopup(url, options, data);
+};
+
+scwin.popupCallBack = function (retObj) {
+  dma_fileInfo.setEmptyValue(); // dma_fileInfo 데이터맵은 공통으로 사용되는 데이터맵이다.
+
+  if (retObj.status == 'S') {
+    com.win.toast(com.data.getMessage('com.inf.0008'));
+    dma_fileInfo.setJSON(retObj);
+  } else {
+    com.win.alert(com.data.getMessage('com.alt.0004', retObj.fileOrginName));
+  }
+};
