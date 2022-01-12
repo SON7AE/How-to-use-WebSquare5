@@ -135,14 +135,24 @@ scwin.btn_fileUpload_onclick = function (e) {
 
   com.win.openPopup(url, options, data);
 };
-
+// 파일업로드 콜백함수
 scwin.popupCallBack = function (retObj) {
-  dma_fileInfo.setEmptyValue(); // dma_fileInfo 데이터맵은 공통으로 사용되는 데이터맵이다.
-
   if (retObj.status == 'S') {
     com.win.toast(com.data.getMessage('com.inf.0008'));
-    dma_fileInfo.setJSON(retObj);
+    dlt_addImage.removeAll(); // 삭제
+    dlt_addImage.insertRow(); // 로우
+
+    // 여러개의 리스트가 돌아갈 땐 for문을 돌린다. 그리고 0 대신에 i를 할당해준다.
+    dlt_addImage.setCellData(0, 'dataListId', 'dataListValue');
+    dlt_addImage.setCellData(0, 'dataListId', 'dataListValue');
+    dlt_addImage.setCellData(0, 'dataListId', 'dataListValue');
+    dlt_addImage.setCellData(0, 'dataListId', 'dataListValue');
+    dlt_addImage.setCellData(0, 'dataListId', 'dataListValue');
   } else {
     com.win.alert(com.data.getMessage('com.alt.0004', retObj.fileOrginName));
   }
+
+  // 그리고나서 최종 파일을 등록할 때, 실행시키는 함수에서
+  // 데이터맵 부분에 아래와 같이 세팅해준다.
+  // dataMapName.set('데이터맵 내 파일데이터리스트 받는 변수이름', '데이터 값');
 };
