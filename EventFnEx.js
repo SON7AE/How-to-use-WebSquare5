@@ -175,3 +175,36 @@ scwin.grd_basic_onclick = function (row, col) {
     scwin.addTab(dataMapName.get('KeyValue'), '상세페이지 url', data);
   }
 };
+
+// --------------------------------------------------------------------
+// 하단 페이지 생성
+scwin.onpageload = function () {
+  scwin.srchProdCntsList(1); // 생성자 함수 이름 - 이름은 랜덤
+};
+
+scwin.srchProdCntsList = function (pageNo) {
+  if (com.util.isEpty(pageNo)) {
+    pageNo = 1;
+  }
+  // dma_pageInfo는 프로젝트 공통 데이터맵
+  dma_pageInfo.set('rowSize', Number(slb_pagePerCount.getValue()));
+  dma_pageInfo.set('pageNo', pageNo);
+
+  dataMapName.set('게시물유형코드', '값'); // 필수요소
+  dataMapName.set('pageNo', '값'); // 필수요소
+  dataMapName.set('rowSize', '값'); // 필수요소
+
+  com.sbm.execute(sbm_retrieve, {}, gcm.SERVICE_LIST_FCMM); // submission 실행함수
+};
+
+scwin.sbm_retrieve_submitdone = function (e) {
+  pglFlag = true;
+  if ('1' == dma_pageInfo.get('pageNo')) {
+    pglFlag = false;
+  }
+  pageLayoutId.setCount(dma_pageInfo.get('totalPage'), true);
+  pageLayoutId.setSelectedIndex(dma_pageInfo.get('pageNo'));
+  noticeCountId.setValue(dma_pageInfo.get('totalCount'));
+
+  com.win.toast(com.data.getMessage('com.inf.0009', '조회'));
+};
