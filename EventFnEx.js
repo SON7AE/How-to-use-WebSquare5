@@ -159,3 +159,19 @@ scwin.popupCallBack = function (retObj) {
   // var ImageValue = dataMapName.get('해당 데이터 변수');
   //
 };
+
+// --------------------------------------------------------------------
+// 상세페이지 이동
+// 목록페이지 셀 선택 이벤트
+// 1. 그리드뷰에 먼저 inputType을 link로 바꿔준다.
+// 2. 그리드뷰에 먼저 id값을 할당해준다.
+scwin.grd_basic_onclick = function (row, col) {
+  if (row == null) return;
+  // 선택한 셀이 링크일 경우
+  if (grd_bnr.getColumnType(col) == 'link') {
+    dataMapName.setJSON(dataListName.getRowJSON(row));
+
+    var data = { baseShwdInfo: dataListName.getRowJSON(row) };
+    scwin.addTab(dataMapName.get('KeyValue'), '상세페이지 url', data);
+  }
+};
