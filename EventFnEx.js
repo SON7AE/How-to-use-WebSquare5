@@ -211,6 +211,7 @@ scwin.sbm_retrieve_submitdone = function (e) {
 
 // --------------------------------------------------------------------
 // 우선노출 여부 이벤트
+// 우선노출 올리기
 scwin.btn_priorEposUp_onClick = function () {
   // btn_priorEposUp : 버튼 이름
   // checkYn : checkBox ID
@@ -242,4 +243,20 @@ scwin.btn_priorEposUp_onClick = function () {
 scwin.sbm_priorY_submitdone = function (e) {
   ecUtil.alert('성공적으로 처리되었습니다.');
   scwin.listReload();
+};
+
+// 우선노출 내리기
+scwin.btn_priorEposDown_onclick = function (e) {
+  ecUtil.copyCheckedDataList(dataListName1, dataListName2, 'checkYn');
+
+  if (dataListName2.getRowCount() == 0) {
+    ecUtil.alery('선택된 항목이 없습니다.');
+    return;
+  }
+  com.sbm.execute(sbm_priorN, {}, gcm.SERVICE_LIST_FCMM);
+};
+
+scwin.sbm_priorN_submitdone = function (e) {
+  ecUtil.alert('성공적으로 처리되었습니다.');
+  // scwin.listReload();
 };
