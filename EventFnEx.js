@@ -208,3 +208,38 @@ scwin.sbm_retrieve_submitdone = function (e) {
 
   com.win.toast(com.data.getMessage('com.inf.0009', '조회'));
 };
+
+// --------------------------------------------------------------------
+// 우선노출 여부 이벤트
+scwin.btn_priorEposUp_onClick = function () {
+  // btn_priorEposUp : 버튼 이름
+  // checkYn : checkBox ID
+  var arrChk = dataListName.getMatchedIndex('checkYn', '1');
+  var changeUseNum = 5 - grd_priorList.getTotalRow();
+
+  if (changeUseNum >= arrChk.length) {
+    ecUtil.copyCheckedDataList(dataListName1, dataListName2, 'checkYn');
+
+    if (dataListName2.getRowCount() == 0) {
+      ecUtil.alert('올리기 대상을 선택하세요.');
+      return;
+    }
+
+    // 노출여부가 N인 게시물은 설정할 수 없습니다.
+    for (var i = 0; i < dataListName2.getRowCount(); i++) {
+      var piorEposYn = dataListName2.etCellData(i, 'piorEposYn');
+      if (piorEposYn == 'N') {
+        ecUtil.alery('노출 여부가 N인 게시물은 설정할 수 없습니다.');
+        return;
+      }
+    }
+    com.sbm.execute(sbm_priorY, {}, gcm.SERVICE_LIST_FCMM);
+  } else {
+    ecUtil.alery('중요 리스트는 5개까지 가능합니다.');
+  }
+};
+
+scwin.sbm_priorY_submitdone = function (e) {
+  ecUtil.alert('성공적으로 처리되었습니다.');
+  scwin.listReload();
+};
