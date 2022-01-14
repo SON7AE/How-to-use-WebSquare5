@@ -227,9 +227,10 @@ scwin.btn_priorEposUp_onClick = function () {
     }
 
     // 노출여부가 N인 게시물은 설정할 수 없습니다.
+    // dataList에 'eposYn' 항목을 추가해줘야한다.
     for (var i = 0; i < dataListName2.getRowCount(); i++) {
-      var piorEposYn = dataListName2.etCellData(i, 'piorEposYn');
-      if (piorEposYn == 'N') {
+      var eposYn = dataListName2.etCellData(i, 'eposYn');
+      if (eposYn == 'N') {
         ecUtil.alery('노출 여부가 N인 게시물은 설정할 수 없습니다.');
         return;
       }
