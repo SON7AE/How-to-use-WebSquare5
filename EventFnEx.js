@@ -261,3 +261,51 @@ scwin.sbm_priorN_submitdone = function (e) {
   ecUtil.alert('성공적으로 처리되었습니다.');
   // scwin.listReload();
 };
+
+// --------------------------------------------------------------------
+// 선택공개 여부 이벤트
+// 선택 비공개
+scwin.btn_eposY_onclick = function (e) {
+  var checkColArr = dlt_list.getMatchedIndex('checkYn', '1');
+  if (checkColArr.length == 0) {
+    com.win.alert('수정할 대상을 선택해주세요.');
+    return false;
+  }
+  dma_eposYn.set('eposYn', 'Y');
+  com.win.confirm('공개로 수정하시겠습니까?', scwin.update_submit);
+};
+
+// 선택 비공개
+scwin.btn_eposN_onclick = function (e) {
+  var checkColArr = dlt_list.getMatchedIndex('checkYn', '1');
+  if (checkColArr.length == 0) {
+    com.win.alert('수정할 대상을 선택해주세요.');
+    return false;
+  }
+  dma_eposYn.set('eposYn', 'N');
+  com.win.confirm('공개로 수정하시겠습니까?', scwin.update_submit);
+};
+
+// 노출여부 변경 서브미션 실행
+scwin.update_submit = function (result) {
+  if (result.clickValue) {
+    var uptJson = dlt_list.getMatchedJSON('checkYn', '1', true);
+    dlt_no.setJSON(uptJson); // dlt_no 데이터리스트에는 게시물 번호 항목이 포함되어 있다.
+
+    if (dma_eposYn.get('eposYN' == 'Y')) {
+      com.sbm.excute(sbm_eposY, {}, gcm.SERVICE_LIST_FCMM);
+    } else {
+      com.sbm.excute(sbm_eposN, {}, gcm.SERVICE_LIST_FCMM);
+    }
+  }
+};
+
+// 노출 여부 변경 완료
+scwin.sbn_eposY_submitdone = function (e) {
+  com.win.alert('수정되었습니다.');
+  scwin.search();
+};
+scwin.sbn_eposN_submitdone = function (e) {
+  com.win.alert('수정되었습니다.');
+  scwin.search();
+};
