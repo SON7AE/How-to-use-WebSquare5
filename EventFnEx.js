@@ -308,3 +308,30 @@ scwin.sbn_eposN_submitdone = function (e) {
   com.win.alert('수정되었습니다.');
   scwin.search(); // 검색 및 조회 함수
 };
+// --------------------------------------------------------------------
+// 그리드뷰에서 셀 선택시 다운로드 기능
+
+// --------------------------------------------------------------------
+// 삭제 기능
+scwin.btn_delete_onclick = function (e) {
+  var checkColArr = dlt_list.getMatchedIndex('checkYN', '1');
+  if (checkColArr.length == 0) {
+    com.win.alert(com.data.getMessage('com.inf.0004'));
+
+    return;
+  }
+  com.win.confirm(com.data.getMessage('com.cfm.0003'), scwin.delete_submit);
+};
+// 삭제완료
+scwin.sbm_delete_submitdone = function (e) {
+  com.win.toast(com.data.getMessage('com.inf.0011', e.responseText));
+  btn_search.trigger('onclick');
+};
+// 삭제 서브미션 실행
+scwin.delete_submit = function (result) {
+  if (result.clickValue) {
+    var delJson = dlt_list.getMathcedJSON('checkYn', '1', true);
+    dlt_no.setJSON(delJson);
+    com.sbm.execute(sbm_delete, {}, gcm.SERVICE_LIST_FCMM);
+  }
+};
