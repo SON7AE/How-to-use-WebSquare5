@@ -310,7 +310,18 @@ scwin.sbn_eposN_submitdone = function (e) {
 };
 // --------------------------------------------------------------------
 // 그리드뷰에서 셀 선택시 다운로드 기능
+scwin.grd_basic_oncellclick = function (row, col) {
+  if (row == null) return;
+  dma_data.setJSON(dlf_list.getRowJSON(row));
 
+  if (grd_list.getColumnType(col) == 'button') {
+    dlt_addFiles.removeAll();
+    var addFile = dlt_list.getCellData(row, 'atclApndFiles');
+    dlt_addFiles.setJSON(addFile);
+
+    location.href = dlt_addFiles.getCellData(0, 'apndFilePathAddr'); // 실제 다운로드 링크
+  }
+};
 // --------------------------------------------------------------------
 // 삭제 기능
 scwin.btn_delete_onclick = function (e) {
@@ -334,4 +345,9 @@ scwin.delete_submit = function (result) {
     dlt_no.setJSON(delJson); // dlt_no에는 게시물 번호 항목이 포함
     com.sbm.execute(sbm_delete, {}, gcm.SERVICE_LIST_FCMM); // sbm_delete 안에는 dlt_no을 참조하고, url은 삭제url, methods는 delete
   }
+};
+// --------------------------------------------------------------------
+// PDF 파일 기능
+scwin.btn_uploadPdf_onclick = function (e) {
+  ecUtil.loadFilePopup('scwin.pdfFilePopupCallBack', 'uhdc/fcmm/pr', 'public-file');
 };
