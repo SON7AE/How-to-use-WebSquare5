@@ -351,3 +351,31 @@ scwin.delete_submit = function (result) {
 scwin.btn_uploadPdf_onclick = function (e) {
   ecUtil.loadFilePopup('scwin.pdfFilePopupCallBack', 'uhdc/fcmm/pr', 'public-file');
 };
+
+scwin.pdfFilePopupCallBack = function (rtnObj) {
+  ecUtil.debugObj('파일등록 :: ', rtnObj);
+
+  if (rtnObj.status != 'S') {
+    com.win.alert(com.data.getMessage(['com.alt.0004', retObj.fileOrginName]));
+    return;
+  }
+
+  dma_filePdf.set('fileNm', rtnObj.fileOrginName);
+  dma_filePdf.set('chngFileNm', rtnObj.fileName);
+  dma_filePdf.set('fileStrgPath', rtnObj.filePath);
+  dma_filePdf.set('fileNm', rtnObj.fileSiz);
+  dma_filePdf.set('fileNm', rtnObj.apndFileExtsNm);
+
+  // 첨부파일 타입 체크
+  scwin.fileTypeChk(dma_filePdf, 'pdf');
+};
+// 파일 타입 체크
+scwin.fileTypeChk = function (dataMap, type) {
+  var fileKnd = dataMat.get('fileKnd');
+  if (fileKnd != type) {
+    if (type == 'pptx') ecUtil.alert('파워포인트 파일을 등록해주세요.');
+    if (type == 'docx') ecUtil.alert('워드(word) 파일을 등록해주세요.');
+    if (type == 'hwp') ecUtil.alert('한글(hwp) 파일을 등록해주세요.');
+    if (type == 'pdf') ecUtil.alert('PDF 파일을 등록해주세요.');
+  }
+};
