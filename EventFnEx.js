@@ -331,7 +331,7 @@ scwin.sbm_delete_submitdone = function (e) {
 scwin.delete_submit = function (result) {
   if (result.clickValue) {
     var delJson = dlt_list.getMathcedJSON('checkYn', '1', true);
-    dlt_no.setJSON(delJson);
-    com.sbm.execute(sbm_delete, {}, gcm.SERVICE_LIST_FCMM);
+    dlt_no.setJSON(delJson); // dlt_no에는 게시물 번호 항목이 포함
+    com.sbm.execute(sbm_delete, {}, gcm.SERVICE_LIST_FCMM); // sbm_delete 안에는 dlt_no을 참조하고, url은 삭제url, methods는 delete
   }
 };
