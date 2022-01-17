@@ -102,7 +102,7 @@ scwin.idName = function () {
 // 취소 버튼 / 리셋 클릭 이벤트
 // 취소 버튼을 눌렀을 때, 데이터를 빈 값으로 넘겨준다 이해하면 된다.
 scwin.btn_reset_onclick = function () {
-  com.win.setInt(LayoutIdName);
+  com.win.setInit(LayoutIdName);
   dataMapName.set('dataKeyId', '');
 };
 
@@ -371,11 +371,35 @@ scwin.pdfFilePopupCallBack = function (rtnObj) {
 };
 // 파일 타입 체크
 scwin.fileTypeChk = function (dataMap, type) {
-  var fileKnd = dataMat.get('fileKnd');
+  var fileKnd = dataMap.get('fileKnd');
   if (fileKnd != type) {
     if (type == 'pptx') ecUtil.alert('파워포인트 파일을 등록해주세요.');
     if (type == 'docx') ecUtil.alert('워드(word) 파일을 등록해주세요.');
     if (type == 'hwp') ecUtil.alert('한글(hwp) 파일을 등록해주세요.');
     if (type == 'pdf') ecUtil.alert('PDF 파일을 등록해주세요.');
   }
+};
+// --------------------------------------------------------------------
+// 페이지 리스트 onviewchange & 페이지 카운트 onviewchange
+// 최초 검색 조회 함수 가명 : search()
+scwin.search = function (pageNo) {
+  if (com.util.isEmpty(pageNo)) {
+    pageNo = 1;
+  }
+  dma_pageInfo.set('rowSize', Number(slb_pagePerCount.getValue()));
+  dma_pageInfo.set('pageNo', pageNo);
+
+  dma_searchParam.set('rowSize', Number(slb_pagePerCount.getValue())); // 게시물 가로 개수
+  dma_searchParam.set('pageNo', pageNo); // 페이지 번호
+  dma_searchParam.set('urcCmpyItduAtclKdCd', '02'); // 게시물유형코드
+
+  com.sbm.execute('submissionName', {}, gcm.SERVICE_LIST_FCMM);
+};
+// page list onviewchange
+scwin.pgl_pageList_onviewchange = function (e) {
+  scwin.search(e.newSelectedIndex);
+};
+// document count onviewchange
+scwin.slb_pagePerCount_onviewchange = function (e) {
+  scwin.search(1);
 };
