@@ -158,7 +158,17 @@ scwin.popupCallBack = function (retObj) {
   // 상세페이지에서 기존의 데이터를 불러올 땐, 아래와 같이 작성한다.
   // var ImageValue = dataMapName.get('해당 데이터 변수');
 };
-
+// 상세페이지에서 파일업로드 삭제
+scwin.btn_delImg_onclick = function (e) {
+  com.win.confirm('첨부된 이미지를 제거하시겠습니까?', function (result) {
+    if (result.clickValue) {
+      // 첨부된 이미지 제거
+      dlt_addImage.removeAll();
+      atclImgeNm.setValue('');
+      atclImgeAltrTxtCntn.setValue('');
+    }
+  });
+};
 // --------------------------------------------------------------------
 // 상세페이지 이동
 // 목록페이지 셀 선택 이벤트
@@ -347,7 +357,7 @@ scwin.delete_submit = function (result) {
   }
 };
 // --------------------------------------------------------------------
-// PDF 파일 기능
+// PDF 파일 업로드 기능
 scwin.btn_uploadPdf_onclick = function (e) {
   ecUtil.loadFilePopup('scwin.pdfFilePopupCallBack', 'uhdc/fcmm/pr', 'public-file');
 };
@@ -403,3 +413,5 @@ scwin.pgl_pageList_onviewchange = function (e) {
 scwin.slb_pagePerCount_onviewchange = function (e) {
   scwin.search(1);
 };
+// --------------------------------------------------------------------
+// 수정 - 상세페이지에서의 modify (update)
