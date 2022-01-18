@@ -151,7 +151,6 @@ scwin.popupCallBack = function (retObj) {
   } else {
     com.win.alert(com.data.getMessage('com.alt.0004', retObj.fileOrginName));
   }
-
   // 그리고나서 최종 파일을 등록할 때, 실행시키는 함수에서
   // 데이터맵 부분에 아래와 같이 세팅해준다.
   // dataMapName.set('데이터맵 내 파일데이터리스트 받는 변수이름', '데이터 값');
