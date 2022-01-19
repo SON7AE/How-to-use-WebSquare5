@@ -5,6 +5,7 @@ scwin.onpageload = function () {
   com.sbm.execute('submissionName', {}, gcm.SERVICE_LIST_FCMM);
   // gcm.SERVICE_LIST_FCMM 이 부분은 서버 이름에 따라 다르다.
 };
+
 // 등록방식 변경 - 체크박스 선택시 UI 제어
 // onchange 함수를 활용하여 내부에서 getValue() 값을 체크해
 // display: none; 과 같이 스타일을 제어할 수 있다.
@@ -18,6 +19,7 @@ scwin.idName_onchange = function () {
     videoContainer.setDisabled(false);
   }
 };
+
 // --------------------------------------------------------------------
 // 버튼클릭 - 페이지 이동
 scwin.idName_onclick = function () {
@@ -29,6 +31,7 @@ scwin.selectTab = function (tabIndex) {
   // tabControl : tab ID 명
   tabControl.setSelectedTabIndex(tabIndex);
 };
+
 // --------------------------------------------------------------------
 // 탭 생성 클릭이벤트
 // 등록 및 탭 생성 버튼의 퍼블리싱 레이아웃이 있다면 이곳에 먼저 이벤트를 걸어준다.
@@ -80,6 +83,7 @@ scwin.idName_onclick = function (e) {
     tabControl.setSelectedTabIndex(tabIndex);
   }
 };
+
 // --------------------------------------------------------------------
 // 변경사항 저장 클릭 이벤트
 scwin.idName = function () {
@@ -93,6 +97,7 @@ scwin.idName = function () {
 
   com.sbm.execute('submissionName', {}, gcm.SERVICE_LIST_FCMM);
 };
+
 // --------------------------------------------------------------------
 // 취소 버튼 / 리셋 클릭 이벤트
 // 취소 버튼을 눌렀을 때, 데이터를 빈 값으로 넘겨준다 이해하면 된다.
@@ -100,6 +105,7 @@ scwin.btn_reset_onclick = function () {
   com.win.setInit(LayoutIdName);
   dataMapName.set('dataKeyId', '');
 };
+
 // --------------------------------------------------------------------
 // Textarea와 같이 텍스트 값이 Null일 경우 에러 처리 알람
 if (com.util.isEmpty(dataMapName.get('KeyId'))) {
@@ -107,6 +113,7 @@ if (com.util.isEmpty(dataMapName.get('KeyId'))) {
   // com.alt.0013 : 프로젝트 공통알람코드
   // '배너명' : 레이아웃 label 값
 }
+
 // --------------------------------------------------------------------
 // 파일업로드 함수
 scwin.btn_fileUpload_onclick = function (e) {
@@ -128,6 +135,7 @@ scwin.btn_fileUpload_onclick = function (e) {
 
   com.win.openPopup(url, options, data);
 };
+
 // 파일업로드 콜백함수
 scwin.popupCallBack = function (retObj) {
   if (retObj.status == 'S') {
@@ -161,6 +169,7 @@ scwin.btn_delImg_onclick = function (e) {
     }
   });
 };
+
 // --------------------------------------------------------------------
 // 상세페이지 이동
 // 목록페이지 셀 선택 이벤트
@@ -176,6 +185,7 @@ scwin.grd_basic_onclick = function (row, col) {
     scwin.addTab(dataMapName.get('KeyValue'), '상세페이지 url', data);
   }
 };
+
 // --------------------------------------------------------------------
 // 하단 페이지 생성
 scwin.onpageload = function () {
@@ -208,6 +218,7 @@ scwin.sbm_retrieve_submitdone = function (e) {
 
   com.win.toast(com.data.getMessage('com.inf.0009', '조회'));
 };
+
 // --------------------------------------------------------------------
 // 우선노출 여부 이벤트
 // 우선노출 올리기
@@ -260,6 +271,7 @@ scwin.sbm_priorN_submitdone = function (e) {
   ecUtil.alert('성공적으로 처리되었습니다.');
   // scwin.listReload();
 };
+
 // --------------------------------------------------------------------
 // 선택공개 여부 이벤트
 // 선택 비공개
@@ -307,6 +319,7 @@ scwin.sbn_eposN_submitdone = function (e) {
   com.win.alert('수정되었습니다.');
   scwin.search(); // 검색 및 조회 함수
 };
+
 // --------------------------------------------------------------------
 // 그리드뷰에서 셀 선택시 다운로드 기능
 scwin.grd_basic_oncellclick = function (row, col) {
@@ -321,6 +334,7 @@ scwin.grd_basic_oncellclick = function (row, col) {
     location.href = dlt_addFiles.getCellData(0, 'apndFilePathAddr'); // 실제 다운로드 링크
   }
 };
+
 // --------------------------------------------------------------------
 // 삭제 기능
 scwin.btn_delete_onclick = function (e) {
@@ -332,11 +346,13 @@ scwin.btn_delete_onclick = function (e) {
   }
   com.win.confirm(com.data.getMessage('com.cfm.0003'), scwin.delete_submit);
 };
+
 // 삭제완료
 scwin.sbm_delete_submitdone = function (e) {
   com.win.toast(com.data.getMessage('com.inf.0011', e.responseText));
   btn_search.trigger('onclick');
 };
+
 // 삭제 서브미션 실행
 scwin.delete_submit = function (result) {
   if (result.clickValue) {
@@ -345,6 +361,7 @@ scwin.delete_submit = function (result) {
     com.sbm.execute(sbm_delete, {}, gcm.SERVICE_LIST_FCMM); // sbm_delete 안에는 dlt_no을 참조하고, url은 삭제url, methods는 delete
   }
 };
+
 // --------------------------------------------------------------------
 // PDF 파일 업로드 기능
 scwin.btn_uploadPdf_onclick = function (e) {
@@ -368,6 +385,7 @@ scwin.pdfFilePopupCallBack = function (rtnObj) {
   // 첨부파일 타입 체크
   scwin.fileTypeChk(dma_filePdf, 'pdf');
 };
+
 // 파일 타입 체크
 scwin.fileTypeChk = function (dataMap, type) {
   var fileKnd = dataMap.get('fileKnd');
@@ -378,6 +396,7 @@ scwin.fileTypeChk = function (dataMap, type) {
     if (type == 'pdf') ecUtil.alert('PDF 파일을 등록해주세요.');
   }
 };
+
 // --------------------------------------------------------------------
 // 페이지 리스트 onviewchange & 페이지 카운트 onviewchange
 // 최초 검색 조회 함수 가명 : search()
@@ -394,14 +413,17 @@ scwin.search = function (pageNo) {
 
   com.sbm.execute('submissionName', {}, gcm.SERVICE_LIST_FCMM);
 };
+
 // page list onviewchange
 scwin.pgl_pageList_onviewchange = function (e) {
   scwin.search(e.newSelectedIndex);
 };
+
 // document count onviewchange
 scwin.slb_pagePerCount_onviewchange = function (e) {
   scwin.search(1);
 };
+
 // --------------------------------------------------------------------
 // 수정 - 상세페이지에서의 modify(update)
 var fileCh = false;
@@ -448,6 +470,7 @@ scwin.btn_update_onclick = function (e) {
   // ... 기타 입력 후
   com.win.confirm(com.data.getMessage('com.cfm.0004'), scwin.update_submit);
 };
+
 // 수정 실행
 scwin.update_submit = function () {
   com.sbm.execute('sbm_modify', {}, gcm.SERVICE_LIST_FCMM);
