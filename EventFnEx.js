@@ -462,6 +462,16 @@ scwin.btn_update_onclick = function (e) {
 scwin.update_submit = function () {
   com.sbm.execute('sbm_modify', {}, gcm.SERVICE_LIST_FCMM);
 };
+
+scwin.sbm_modify_submitdone = function () {
+  com.win.alert('게시물 수정이 완료되었습니다.');
+
+  var tabIdx = $p.parent().tabList.getTabindex(dma_param.get('urcCmpyItduAtclNo'));
+
+  $p.parent().btn_search.trigger('onclick');
+  $p.parent().tabList.setSelectedTabIndex(0);
+  $p.parent().tabList.setLabelText(tabIdx, dma_param.get('titNm'));
+};
 // --------------------------------------------------------------------
 // 이미지 수정
 scwin.btn_delImg_onclick = function (e) {
