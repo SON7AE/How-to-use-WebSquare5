@@ -413,4 +413,49 @@ scwin.slb_pagePerCount_onviewchange = function (e) {
   scwin.search(1);
 };
 // --------------------------------------------------------------------
-// 수정 - 상세페이지에서의 modify (update)
+// 수정 - 상세페이지에서의 modify(update)
+var fileCh = false;
+scwin.onpageload = function () {
+  if (!com.util.isEmpty(com.data.getParameter('baseShwdInfo'))) {
+    dma_param.setJSON(com.dta.getParameter('baseShwdInfo'));
+  }
+
+  atclCntn.setHTML(dma_param.get('atclCntn')); // 텍스트 내용
+
+  scwin.fileLabel();
+};
+
+scwin.fileLabel = function () {
+  var objImg = dma_param.get('atclImges');
+  dlt_addImage.insertRow(0);
+  dlt_addImage.setRowJSON(0, objImg[0], true);
+
+  // console.log(dlt_addImage);
+
+  atclImgeNm.setValue(objImg[0].atclImgeOcpyNm);
+  replaceText.setValue(objImg[0].atclImgeAltrTxtCntn);
+};
+
+// 수정부분
+scwin.btn_update_onclick = function (e) {
+  dlt_addImage.setCellData(0, 'atclImgeAltrTxtCntn', replaceText.getValue());
+
+  var arrIdx = dma_param.getModifiedIndex();
+
+  if (arrIdx == 0 && fileCh == false) {
+    // 변경된 데이터가 없습니다.
+    com.win.alert('com.alt.0010');
+  }
+};
+// --------------------------------------------------------------------
+// 이미지 수정
+scwin.btn_delImg_onclick = function (e) {
+  com.win.confirm('첨부된 이미지를 삭제하시겠습니까?', function (result) {
+    if (result.clickValue) {
+      // 첨부된 이미지 제거
+      dlt_addImage.removeAll();
+      atclImgeNm.setValue(''); // 이미지명 값에 빈 값을 할당하여 화면에 아무런 입력 값이 보이지 않게 한다.
+      replaceText.setValue(''); // 대체텍스트 값에 빈 값을 할당하여 화면에 아무런 입력 값도 보이지 않게 한다.
+    }
+  });
+};
