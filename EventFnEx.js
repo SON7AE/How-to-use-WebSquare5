@@ -5,7 +5,6 @@ scwin.onpageload = function () {
   com.sbm.execute('submissionName', {}, gcm.SERVICE_LIST_FCMM);
   // gcm.SERVICE_LIST_FCMM 이 부분은 서버 이름에 따라 다르다.
 };
-
 // 등록방식 변경 - 체크박스 선택시 UI 제어
 // onchange 함수를 활용하여 내부에서 getValue() 값을 체크해
 // display: none; 과 같이 스타일을 제어할 수 있다.
@@ -19,7 +18,6 @@ scwin.idName_onchange = function () {
     videoContainer.setDisabled(false);
   }
 };
-
 // --------------------------------------------------------------------
 // 버튼클릭 - 페이지 이동
 scwin.idName_onclick = function () {
@@ -31,7 +29,6 @@ scwin.selectTab = function (tabIndex) {
   // tabControl : tab ID 명
   tabControl.setSelectedTabIndex(tabIndex);
 };
-
 // --------------------------------------------------------------------
 // 탭 생성 클릭이벤트
 // 등록 및 탭 생성 버튼의 퍼블리싱 레이아웃이 있다면 이곳에 먼저 이벤트를 걸어준다.
@@ -83,7 +80,6 @@ scwin.idName_onclick = function (e) {
     tabControl.setSelectedTabIndex(tabIndex);
   }
 };
-
 // --------------------------------------------------------------------
 // 변경사항 저장 클릭 이벤트
 scwin.idName = function () {
@@ -97,7 +93,6 @@ scwin.idName = function () {
 
   com.sbm.execute('submissionName', {}, gcm.SERVICE_LIST_FCMM);
 };
-
 // --------------------------------------------------------------------
 // 취소 버튼 / 리셋 클릭 이벤트
 // 취소 버튼을 눌렀을 때, 데이터를 빈 값으로 넘겨준다 이해하면 된다.
@@ -105,7 +100,6 @@ scwin.btn_reset_onclick = function () {
   com.win.setInit(LayoutIdName);
   dataMapName.set('dataKeyId', '');
 };
-
 // --------------------------------------------------------------------
 // Textarea와 같이 텍스트 값이 Null일 경우 에러 처리 알람
 if (com.util.isEmpty(dataMapName.get('KeyId'))) {
@@ -113,7 +107,6 @@ if (com.util.isEmpty(dataMapName.get('KeyId'))) {
   // com.alt.0013 : 프로젝트 공통알람코드
   // '배너명' : 레이아웃 label 값
 }
-
 // --------------------------------------------------------------------
 // 파일업로드 함수
 scwin.btn_fileUpload_onclick = function (e) {
@@ -183,7 +176,6 @@ scwin.grd_basic_onclick = function (row, col) {
     scwin.addTab(dataMapName.get('KeyValue'), '상세페이지 url', data);
   }
 };
-
 // --------------------------------------------------------------------
 // 하단 페이지 생성
 scwin.onpageload = function () {
@@ -216,7 +208,6 @@ scwin.sbm_retrieve_submitdone = function (e) {
 
   com.win.toast(com.data.getMessage('com.inf.0009', '조회'));
 };
-
 // --------------------------------------------------------------------
 // 우선노출 여부 이벤트
 // 우선노출 올리기
@@ -269,7 +260,6 @@ scwin.sbm_priorN_submitdone = function (e) {
   ecUtil.alert('성공적으로 처리되었습니다.');
   // scwin.listReload();
 };
-
 // --------------------------------------------------------------------
 // 선택공개 여부 이벤트
 // 선택 비공개
