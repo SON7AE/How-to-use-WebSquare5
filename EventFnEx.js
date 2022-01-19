@@ -445,7 +445,22 @@ scwin.btn_update_onclick = function (e) {
   if (arrIdx == 0 && fileCh == false) {
     // 변경된 데이터가 없습니다.
     com.win.alert('com.alt.0010');
+    return false;
   }
+
+  dlt_addImage.setCellData(0, 'stusCd', 'U'); // 프로젝트마다 다를 수 있지만, api parameter에 따라 수정시에 따로 추가해줘야 하는 부분이 있을 수 있다.
+
+  // 파일과 이미지 정보 교체를 위해 빈 배열 입력수 재세팅
+  var emptyArr = [];
+  // 등록 - 데이터 등록을 위한 기본 필수 값 입력
+  dma_param.set('atclImges', emptyArr);
+  dma_param.set('atclImges', dlt_addImage.getAllJSON()); // getAllJSON() : dataList의 1row의 값을 JSON으로 반환하여 전체 data를 1차원 배열에 담아 반환한다.
+  // ... 기타 입력 후
+  com.win.confirm(com.data.getMessage('com.cfm.0004'), scwin.update_submit);
+};
+// 수정 실행
+scwin.update_submit = function () {
+  com.sbm.execute('sbm_modify', {}, gcm.SERVICE_LIST_FCMM);
 };
 // --------------------------------------------------------------------
 // 이미지 수정
