@@ -315,6 +315,7 @@ scwin.sbn_eposY_submitdone = function (e) {
   com.win.alert('수정되었습니다.');
   scwin.search();
 };
+
 scwin.sbn_eposN_submitdone = function (e) {
   com.win.alert('수정되었습니다.');
   scwin.search(); // 검색 및 조회 함수
