@@ -488,6 +488,8 @@ scwin.sbm_modify_submitdone = function () {
 };
 // --------------------------------------------------------------------
 // 상세페이지
+fileCh = false;
+
 scwin.onpageload = function () {
   if (!com.util.isEmpty(com.data.getParameter('baseShwdInfo'))) {
     dataMapName.setJSON(com.data.getParameter('basShwdInfo'));
@@ -548,4 +550,40 @@ scwin.btn_fileUpload_onclick = function (e) {
   };
 
   com.win.openPopup(url, options, data);
+};
+
+// 파일제어 콜백
+scwin.popupcallBack = function (retObj) {
+  fileCh = true; // 임의로 할당한 조건 변수
+
+  if (retObj.status == 'S') {
+    com.win.toast(com.data.getMessage('com.inf.0008'));
+
+    dlt_addImages.removeAll(); // 제거
+    dlt_addImages.insertRow(0); // 로우 생성
+
+    // 게시물 이미지 상세번호
+    dlt_addImages.setCellData(0, 'urcCmpyItduAtclImgeSno', '01');
+
+    // 게시물 이미지 경로내용
+    dlt_addImages.setCellData(0, 'atclImgePathNm', 'retObj.fileOriginName');
+
+    // 게시물 이미지 대체텍스트
+    dlt_addImages.setCellData(0, 'atclImgeAltrTxtCntn', 'retObj.fileReplaceText');
+
+    // 게시물 이미지 정책명
+    dlt_addImages.setCellData(0, 'atclImgePlcyNm', 'retObj.policy');
+
+    // 게시물 이미지 원본명
+    dlt_addImages.setCellData(0, 'atclImgeOcpyNm', 'retObj.fileOrginName');
+
+    // 게시물 이미지 경로주소
+    dlt_addImages.setCellData(0, 'atclImgePathUrl', 'retObj.url');
+
+    // 게시물 이미지 이름
+    dlt_addImages.setCellData(0, 'atclImgeNm', 'retObj.fileName');
+
+    // 게시물 이미지 순서
+    dlt_addImages.setCellData(0, 'atclImgeEposOrd', '01');
+  }
 };
