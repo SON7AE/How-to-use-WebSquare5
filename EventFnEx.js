@@ -499,3 +499,27 @@ scwin.btn_delImg_onclick = function (e) {
     }
   });
 };
+
+// 상세페이지
+scwin.onpageload = function () {
+  if (!com.util.isEmpty(com.data.getParameter('baseShwdInfo'))) {
+    dataMapName.setJSON(com.data.getParameter('basShwdInfo'));
+  }
+
+  atclCntn.setHTML(dataMapName.get('atclCntn'));
+
+  scwin.fileLabel();
+};
+
+scwin.onpageunload = function () {};
+
+// 등록페이지에서 등록한 데이터를 기반으로 상세페이지에서 조회하기 위해 작성한 코드
+scwin.fileLabel = function () {
+  var objImg = dma_param.get('atclImges');
+
+  dlt_addImages.insertRow(0);
+  dlt_addImages.setRowJSON(0, objImg[0], true);
+
+  atclImgeNm.setValue(objImg[0].atclImgeOcpyNm);
+  atclImgeAltrTxtCntn.setValue(objImg[0].atclImgeAltrTxtCntn);
+};
