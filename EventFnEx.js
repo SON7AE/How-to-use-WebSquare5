@@ -487,19 +487,6 @@ scwin.sbm_modify_submitdone = function () {
   $p.parent().tabList.setLabelText(tabIdx, dma_param.get('titNm'));
 };
 // --------------------------------------------------------------------
-// 이미지 수정
-scwin.btn_delImg_onclick = function (e) {
-  com.win.confirm('첨부된 이미지를 삭제하시겠습니까?', function (result) {
-    if (result.clickValue) {
-      // 첨부된 이미지 제거
-      dlt_addImage.removeAll();
-      dataMapName.set('atclImges', ''); // atclImges : 이미지 첨부목록 list
-      atclImgeNm.setValue(''); // 이미지명 값에 빈 값을 할당하여 화면에 아무런 입력 값이 보이지 않게 한다.
-      replaceText.setValue(''); // 대체텍스트 값에 빈 값을 할당하여 화면에 아무런 입력 값도 보이지 않게 한다.
-    }
-  });
-};
-
 // 상세페이지
 scwin.onpageload = function () {
   if (!com.util.isEmpty(com.data.getParameter('baseShwdInfo'))) {
@@ -522,4 +509,43 @@ scwin.fileLabel = function () {
 
   atclImgeNm.setValue(objImg[0].atclImgeOcpyNm);
   atclImgeAltrTxtCntn.setValue(objImg[0].atclImgeAltrTxtCntn);
+};
+
+// 이미지 수정
+scwin.btn_delImg_onclick = function (e) {
+  com.win.confirm('첨부된 이미지를 삭제하시겠습니까?', function (result) {
+    if (result.clickValue) {
+      // 첨부된 이미지 제거
+      dlt_addImage.removeAll();
+      dataMapName.set('atclImges', ''); // atclImges : 이미지 첨부목록 list
+      atclImgeNm.setValue(''); // 이미지명 값에 빈 값을 할당하여 화면에 아무런 입력 값이 보이지 않게 한다.
+      replaceText.setValue(''); // 대체텍스트 값에 빈 값을 할당하여 화면에 아무런 입력 값도 보이지 않게 한다.
+    }
+  });
+};
+
+// 이미지 이름을 클릭하여 다운로드 실행
+scwin.atclImgeNm_onclick = function (e) {
+  location.href = dlt_addFiles.getCellData(0, 'apndFilePathAddr');
+};
+
+// 이미지 등록
+// 이미지 업로드
+scwin.btn_fileUpload_onclick = function (e) {
+  var url = '../../../commonFileUploadPopup.xml'; // 해당 공통 팝업 url
+  var data = {
+    type: 'insert', // 해당 프로젝트 참조
+    policy: 'public-img', // 해당 프로젝트 참조
+    subPath: '../fcmm/prod/', // 해당 프로젝트 참조
+    callbackFn: 'scwin.popupCallBack', // 해당 프로젝트 참조
+  };
+  var options = {
+    id: 'insertPopup',
+    modal: true,
+    width: 700,
+    height: 250,
+    type: 'wframePopup',
+  };
+
+  com.win.openPopup(url, options, data);
 };
