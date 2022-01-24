@@ -493,6 +493,7 @@ scwin.btn_delImg_onclick = function (e) {
     if (result.clickValue) {
       // 첨부된 이미지 제거
       dlt_addImage.removeAll();
+      dataMapName.set('atclImges', ''); // atclImges : 이미지 첨부목록 list
       atclImgeNm.setValue(''); // 이미지명 값에 빈 값을 할당하여 화면에 아무런 입력 값이 보이지 않게 한다.
       replaceText.setValue(''); // 대체텍스트 값에 빈 값을 할당하여 화면에 아무런 입력 값도 보이지 않게 한다.
     }
