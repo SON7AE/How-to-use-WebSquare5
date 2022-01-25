@@ -585,5 +585,29 @@ scwin.popupcallBack = function (retObj) {
 
     // 게시물 이미지 순서
     dlt_addImages.setCellData(0, 'atclImgeEposOrd', '01');
+
+    atclimgeNm.setValue(retObj.fileOrginName + '(' + retObj.fileSize + ')');
+    fileEx.visible(true); // fileEx는 파일업로드 버튼 레이아웃 id
+  } else {
+    com.win.alert(com.data.getmessage('com.alt.0004', retObj.fileOrginName));
   }
+};
+
+// 게시물 수정
+// 저장(수정) 버튼 클릭 이벤트
+scwin.btn_update_onclick = function (e) {
+  // 상태코드
+  dlt_addImages.setCellData(0, 'atclImgeAltrTxtCntn', atclImgeAltrTxtCntn.getValue());
+  dlt_addImages.setCellData(0, 'stusCd', 'U');
+
+  // ... 이하 동일
+
+  // 수정 실행
+  com.sbm_modify_submitdone = function (e) {
+    com.win.alert('수정이 완료되었습니다.');
+    // 화면을 새로고침하여 목록창 띄어주기 기능 주가
+    scwin.$w.parent().scwin.selecTab(0);
+    // 탭 닫기
+    $p.parent().scwin.fn_deleteTabCallback(); // => 부모 컴포넌트에서 찾아볼 수 있다.
+  };
 };
