@@ -85,7 +85,7 @@ scwin.idName_onclick = function (e) {
 };
 
 // --------------------------------------------------------------------
-// 변경사항 저장 클릭 이벤트
+// 변경사항 저장 클릭이벤트 1
 scwin.idName = function () {
   // 필수요소 조건
   dataMapName.set('dataKeyId', 'dataKeyIdValue');
@@ -96,6 +96,15 @@ scwin.idName = function () {
   dataMapName.set('dataKeyId', dataKeyIdValue.getValue());
 
   com.sbm.execute('submissionName', {}, gcm.SERVICE_LIST_FCMM);
+};
+
+// 변경사항 저장 클릭이벤트 2
+scwin.btn_updateList_onclick = function (e) {
+  dlt_updateOrd.setJSON(dlt_retrieve.getUpdatedJSON());
+
+  if (dlt_updateOrd.getRowCount() > 0) {
+    com.sbm.excute(sbm_retrieve_update, {}, gcm.SERVICE_LIST_FCMM);
+  }
 };
 
 // --------------------------------------------------------------------
