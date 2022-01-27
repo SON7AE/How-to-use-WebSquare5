@@ -100,11 +100,18 @@ scwin.idName = function () {
 
 // 변경사항 저장 클릭이벤트 2
 scwin.btn_updateList_onclick = function (e) {
+  // dlt_updateOrd : 게시물 전시순서 수정을 위한 데이터리스트
+  // dlt_retrieve : 게시물 전체 데이터 조회를 위한 데이터 리스트
   dlt_updateOrd.setJSON(dlt_retrieve.getUpdatedJSON());
 
   if (dlt_updateOrd.getRowCount() > 0) {
     com.sbm.excute(sbm_retrieve_update, {}, gcm.SERVICE_LIST_FCMM);
   }
+};
+
+scwin.sbm_retrieve_update_submitdone = function (e) {
+  com.win.alert('저장되었습니다.');
+  scwin.fn_getList(); // 게시물 조회 함수
 };
 
 // --------------------------------------------------------------------
