@@ -502,6 +502,7 @@ scwin.sbm_modify_submitdone = function () {
   $p.parent().tabList.setSelectedTabIndex(0);
   $p.parent().tabList.setLabelText(tabIdx, dma_param.get('titNm'));
 };
+
 // --------------------------------------------------------------------
 // 상세페이지
 fileCh = false;
