@@ -637,3 +637,39 @@ scwin.btn_update_onclick = function (e) {
     }, 1500);
   };
 };
+
+// --------------------------------------------------------------------
+// 게시물페이지포함 우선비포함 조회 중 검색 조건에 체크박스 있는 겅우
+scwin.srchProdCntsList = function (pageNo) {
+  if (com.util.isEmpty(pageNo)) {
+    pageNo = 1;
+  }
+  dma_pageInfo.set('rowSize', Number(slb_pagePerCount.getValue()));
+  dma_pageInfo.set('pageNo', pageNo);
+
+  var chkValue = chk_epos.getValue();
+
+  if (chkValue.search('mb') != -1) {
+    dma_searchParam.set('mblEpos', 'Y');
+  } else {
+    dma_searchParam.set('mblEpos', 'N');
+  }
+
+  if (chkValue.search('hm') != -1) {
+    dma_searchParam.set('hmEpos', 'Y');
+  } else {
+    dma_searchParam.set('hmEpos', 'N');
+  }
+
+  if (chkValue.search('entp') != -1) {
+    dma_searchParam.set('entpEpos', 'Y');
+  } else {
+    dma_searchParam.set('entpEpos', 'N');
+  }
+
+  dma_searchParam.set('urcCmpyItduAtclKdCd', '06');
+  dma_searchParam.set('pageNo', pageNo);
+  dma_searchParam.set('rowSize', Number(slb_pagePerCount.getValue()));
+
+  com.sbm.execute(sbm_retrieve, {}, gcm.SERVICE_LIST_FCMM);
+};
