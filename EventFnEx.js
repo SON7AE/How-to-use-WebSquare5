@@ -626,4 +626,14 @@ scwin.btn_update_onclick = function (e) {
     // 탭 닫기
     $p.parent().scwin.fn_deleteTabCallback(); // => 부모 컴포넌트에서 찾아볼 수 있다.
   };
+
+  // 수정 실행 2
+  com.sbm_modify_submitdone = function (e) {
+    com.win.alert('수정이 완료되었습니다.');
+
+    setTimeout(function (e) {
+      $p.parent().scwin.fn_deleteTabCallback($p.parent().tabList.getSelectedTabIndex());
+      scwin.$w.parent().scwin.selectTab(0);
+    }, 1500);
+  };
 };
